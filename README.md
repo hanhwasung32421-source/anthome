@@ -17,11 +17,11 @@
 - `content`: 문자열 배열(줄 단위)
 
 ## 페이지 구성
-- 홈: `index.html`
-- 회사소개: `pages/company-*.html`
-- 사업영역: `pages/business-*.html`
-- 고객지원/공지: `pages/support-notice.html`, `pages/notice-detail.html`
+- 홈: `/index.html`
+- 회사소개: `/company/` + 하위(`/company/overview/` 등)
+- 사업영역: `/business/` + 하위(`/business/advisory/` 등)
+- 고객지원: `/support/` + 하위(`/support/notice/`, `/support/press/`)
 
 ## 스타일/폰트
-- 폰트: Google Fonts `Inter`
-- UI: Tailwind CDN(`https://cdn.tailwindcss.com`) 기반 + `assets/clone.css` 소량 커스텀
+- 폰트: Google Fonts `Noto Sans KR`
+- UI: Tailwind CDN(`https://cdn.tailwindcss.com`) 기반 + `assets/clone.css` 공통 디자인 시스템

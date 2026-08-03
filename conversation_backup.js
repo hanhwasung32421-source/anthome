@@ -145,5 +145,17 @@ const entries = [
     content:
       "상단 메뉴의 `상담 예약하기` 버튼은 삭제했고, 첫 화면 메인 버튼의 `상담 예약하기`는 `회사 소개`로 바꿔서 `company-overview.html`로 연결되게 수정했어.",
   },
+  {
+    at: "2026-08-03",
+    role: "user",
+    content:
+      "사이트 좀더 전문가스럽게 만들어줘. 디자인도 너무 심플해. 좀 더 멋지게 만들어줘. 레퍼런스 사이트를 줄테니까 참고해서 만들어.\n\n`http://www.yeouidoinvestment.com/`\n\n사이트 모든페이지를 너가 훑어보고 참고하고 너는 20년차 웹디자이너야. 그런 관점에서 세련되게 만들어줘.\n그리고 한페이지에 다 만들지말고 폴더 나눠줘. url도 나뉘게.",
+  },
+  {
+    at: "2026-08-03",
+    role: "assistant",
+    content:
+      "레퍼런스의 섹션 구성(서비스/특징/등급/후기/고지)과 ‘프리미엄’ 무드를 참고해, 공통 디자인 시스템을 강화하고 전체 사이트를 폴더 기반 멀티페이지 구조로 재구성했어. 경로는 `/company/`, `/business/`, `/support/` 형태로 나뉘고, 공지는 `/support/notice/`(목록) + `/support/notice/detail.html`(상세)로 분리했어. 기존 `pages/` 폴더는 제거하고 새 구조로 통일했어.",
+  },
 ];
 module.exports = { entries };
