@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>개미투자</title>
+    <meta name="description" content="개미투자 | 공지 기반(읽기 전용) 운영의 프리미엄 투자 자문/리서치" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: [
+                "Noto Sans KR",
+                "ui-sans-serif",
+                "system-ui",
+                "-apple-system",
+                "Segoe UI",
+                "Roboto",
+                "Apple SD Gothic Neo",
+                "Malgun Gothic",
+              ],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      :root {
+        /* hangangivt 톤 참고: 네이비 + 골드 느낌을 살리고, 트렌디하게 시안/블루 그라데이션을 섞음 */
+        --ink: #071125;
+        --muted: #5b6b85;
+        --line: rgba(7, 17, 37, 0.12);
+        --glass: rgba(255, 255, 255, 0.72);
+        --blue: #2563eb;
+        --cyan: #06b6d4;
+        --gold: #f59e0b;
+        --pink: #f472b6;
+      }
+
+      .break-keep {
+        word-break: keep-all;
+      }
+
+      /* 배경을 '전문 툴로 만든 듯' 보이게 만드는 핵심: 메쉬 + 은은한 노이즈 */
+      .mesh-bg {
+        background: radial-gradient(1200px 600px at 10% 0%, rgba(37, 99, 235, 0.16), transparent 55%),
+          radial-gradient(900px 520px at 88% 10%, rgba(6, 182, 212, 0.14), transparent 55%),
+          radial-gradient(820px 560px at 30% 110%, rgba(245, 158, 11, 0.11), transparent 60%),
+          radial-gradient(720px 520px at 92% 120%, rgba(244, 114, 182, 0.1), transparent 60%), #ffffff;
+      }
+
+      .glass-header {
+        background: #ffffff; /* 요청: 제목바 흰색 */
+        border-bottom: 1px solid var(--line);
+      }
+
+      .logo-badge {
+        width: 40px;
+        height: 40px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        font-weight: 900;
+        color: #fff;
+        background: linear-gradient(135deg, var(--blue), var(--cyan));
+        box-shadow: 0 18px 46px rgba(37, 99, 235, 0.18);
+      }
+
+      .nav-link {
+        padding: 10px 12px;
+        border-radius: 999px;
+        color: rgba(7, 17, 37, 0.78);
+        transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+      }
+      .nav-link:hover {
+        background: rgba(7, 17, 37, 0.06);
+        color: rgba(7, 17, 37, 0.92);
+        transform: translateY(-1px);
+      }
+
+      .hero-bg {
+        background-image: url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1920");
+        background-size: cover;
+        background-position: center;
+      }
+
+      .glass-card {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        box-shadow: 0 24px 80px rgba(7, 17, 37, 0.42);
+        backdrop-filter: blur(16px);
+      }
+
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 14px 22px;
+        border-radius: 999px;
+        color: #fff;
+        font-weight: 900;
+        background: linear-gradient(135deg, var(--blue), var(--cyan));
+        box-shadow: 0 16px 38px rgba(6, 182, 212, 0.18), 0 10px 26px rgba(37, 99, 235, 0.14);
+        transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
+      }
+      .btn-primary:hover {
+        transform: translateY(-1px);
+        filter: saturate(1.06);
+        box-shadow: 0 22px 50px rgba(6, 182, 212, 0.2), 0 12px 30px rgba(37, 99, 235, 0.16);
+      }
+
+      .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 14px 22px;
+        border-radius: 18px;
+        color: rgba(7, 17, 37, 0.92);
+        font-weight: 900;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 14px 36px rgba(7, 17, 37, 0.16);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+      .btn-secondary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 18px 46px rgba(7, 17, 37, 0.2);
+      }
+
+      .btn-dark {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 22px;
+        border-radius: 18px;
+        color: #fff;
+        font-weight: 900;
+        background: linear-gradient(180deg, #0b152e, #071125);
+        box-shadow: 0 14px 36px rgba(7, 17, 37, 0.22);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+      .btn-dark:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 18px 46px rgba(7, 17, 37, 0.26);
+      }
+
+      .card-soft {
+        background: rgba(255, 255, 255, 0.86);
+        border: 1px solid rgba(7, 17, 37, 0.1);
+        box-shadow: 0 22px 64px rgba(7, 17, 37, 0.08);
+      }
+
+      .card-border {
+        position: relative;
+        overflow: hidden;
+      }
+      .card-border:before {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.35), rgba(6, 182, 212, 0.28), rgba(245, 158, 11, 0.22));
+        opacity: 0.35;
+        pointer-events: none;
+        filter: blur(22px);
+      }
+      .card-border > * {
+        position: relative;
+      }
+
+      .lift {
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+      }
+      .lift:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 28px 86px rgba(7, 17, 37, 0.12);
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 800;
+        color: rgba(255, 255, 255, 0.92);
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .btn-primary,
+        .btn-secondary,
+        .btn-dark,
+        .nav-link,
+        .lift {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="font-sans text-slate-900 mesh-bg">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50">
+      <div class="glass-header">
+        <div class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
+          <a class="flex items-center gap-3" href="./index.html">
+            <div class="logo-badge">G</div>
+            <div class="text-2xl font-black tracking-tight">개미투자</div>
+          </a>
+          <nav class="hidden md:flex items-center gap-2 text-sm font-bold">
+            <a class="nav-link" href="./index.html">홈</a>
+            <a class="nav-link" href="./pages/company-overview.html">회사소개</a>
+            <a class="nav-link" href="./pages/business-advisory.html">사업영역</a>
+            <a class="nav-link" href="./pages/support-notice.html">고객지원</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero-bg relative pt-[73px] md:pt-[73px]">
+      <div class="absolute inset-0 bg-gradient-to-b from-[#071125]/80 via-[#071125]/35 to-transparent"></div>
+      <div
+        class="absolute inset-0"
+        style="
+          background: radial-gradient(900px 520px at 18% 16%, rgba(37, 99, 235, 0.24), transparent 60%),
+            radial-gradient(820px 480px at 86% 12%, rgba(6, 182, 212, 0.22), transparent 56%),
+            radial-gradient(900px 640px at 60% 110%, rgba(245, 158, 11, 0.16), transparent 62%);
+        "
+      ></div>
+
+      <div class="relative max-w-6xl mx-auto px-5 pt-0 pb-14 md:pt-0 md:pb-24">
+        <div class="grid lg:grid-cols-12 gap-8 items-stretch">
+          <div class="lg:col-span-7">
+            <div class="glass-card card-border rounded-3xl p-7 md:p-10">
+              <div class="badge">
+                <span class="w-2 h-2 rounded-full" style="background: linear-gradient(135deg, var(--blue), var(--cyan));"></span>
+                <span>Premium Investment & Advisory</span>
+              </div>
+
+              <h1 class="text-[2.6rem] md:text-[5.25rem] font-black mb-6 leading-[0.95] break-keep mt-6 text-white">
+                투자의 깊이를 더하는<br />
+                <span class="text-white">개미투자</span>
+              </h1>
+
+              <p class="text-white/85 leading-relaxed text-base md:text-lg max-w-2xl">
+                유사투자자문업을 영위함으로써 홈페이지 내 양방향소통을 위한 창구는 없습니다. 읽기 전용 홈페이지 입니다.
+              </p>
+
+              <div class="mt-8 flex flex-col sm:flex-row gap-3">
+                <a class="btn-primary w-full sm:w-auto" href="./pages/company-overview.html">회사 소개</a>
+                <a class="btn-secondary w-full sm:w-auto" href="./pages/support-notice.html">공지사항 바로가기</a>
+              </div>
+
+              <div class="mt-8 grid sm:grid-cols-3 gap-3 text-white/85 text-xs">
+                <div class="rounded-2xl border border-white/15 bg-white/5 p-4">
+                  <div class="font-black">읽기 전용 공지</div>
+                  <div class="mt-1 text-white/70">운영자만 등록</div>
+                </div>
+                <div class="rounded-2xl border border-white/15 bg-white/5 p-4">
+                  <div class="font-black">업무시간</div>
+                  <div class="mt-1 text-white/70">평일 09:00-18:00</div>
+                </div>
+                <div class="rounded-2xl border border-white/15 bg-white/5 p-4">
+                  <div class="font-black">연락처</div>
+                  <div class="mt-1 text-white/70">0000-0000-0000</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="lg:col-span-5">
+            <div class="card-soft card-border rounded-3xl p-7 md:p-8 lift">
+              <div class="text-xs font-black tracking-widest uppercase" style="color: var(--muted);">Quick access</div>
+              <div class="mt-4 text-2xl font-black leading-tight break-keep" style="color: var(--ink);">
+                공지로만 안내하고<br />깔끔하게 운영합니다
+              </div>
+              <div class="mt-3 text-sm leading-relaxed" style="color: var(--muted);">
+                댓글/게시판 같은 상호 소통 없이, 운영자 공지와 안내만 “보기 좋게” 제공하는 구조입니다.
+              </div>
+              <div class="mt-6 grid gap-3">
+                <a class="btn-primary w-full" href="./pages/support-notice.html">공지사항</a>
+                <a class="btn-dark w-full" href="./pages/support-consult.html">상담 신청</a>
+              </div>
+              <div class="mt-6 rounded-2xl border p-5" style="border-color: var(--line); background: rgba(255, 255, 255, 0.72);">
+                <div class="text-xs font-black" style="color: var(--ink);">Company</div>
+                <div class="mt-2 text-sm" style="color: var(--muted);">상호명: 개미투자</div>
+                <div class="text-sm" style="color: var(--muted);">대표자: 0000</div>
+                <div class="text-sm" style="color: var(--muted);">사업자등록번호: 0000-0000-0000</div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bento services -->
+    <section class="py-16 md:py-24">
+      <div class="max-w-6xl mx-auto px-5">
+        <div class="text-center">
+          <h2 class="text-sm font-black tracking-widest uppercase" style="color: var(--muted);">Our Services</h2>
+          <h3 class="text-3xl md:text-5xl font-black mt-3" style="color: var(--ink);">전문성과 신뢰의 서비스</h3>
+          <p class="mt-4 max-w-2xl mx-auto text-base leading-relaxed" style="color: var(--muted);">
+            최신 트렌드의 “소프트 카드 + 정돈된 타이포 + 포인트 컬러”로 구성했습니다.
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-6 mt-12">
+          <div class="lg:col-span-5 card-soft card-border rounded-3xl p-7 lift">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <div class="text-xs font-black tracking-widest uppercase" style="color: var(--muted);">Quant research</div>
+                <div class="mt-2 text-xl font-black" style="color: var(--ink);">퀀트 리서치 & 자문</div>
+              </div>
+              <div class="w-11 h-11 rounded-2xl grid place-items-center" style="background: rgba(37, 99, 235, 0.1); color: var(--blue);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 18V6m0 12h16M8 15v-3m4 3V9m4 6v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </div>
+            </div>
+            <p class="mt-4 text-sm leading-relaxed" style="color: var(--muted);">
+              데이터/가정/리스크를 분리해 설명 가능한 형태로 리서치를 구조화합니다.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-full text-xs font-bold" style="background: rgba(6, 182, 212, 0.1); color: rgba(7, 17, 37, 0.75);">지표 설계</span>
+              <span class="px-3 py-1 rounded-full text-xs font-bold" style="background: rgba(245, 158, 11, 0.12); color: rgba(7, 17, 37, 0.75);">리스크</span>
+              <span class="px-3 py-1 rounded-full text-xs font-bold" style="background: rgba(244, 114, 182, 0.1); color: rgba(7, 17, 37, 0.75);">시나리오</span>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7 card-soft card-border rounded-3xl p-7 lift">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <div class="text-xs font-black tracking-widest uppercase" style="color: var(--muted);">Marketing</div>
+                <div class="mt-2 text-xl font-black" style="color: var(--ink);">글로벌 금융 마케팅</div>
+              </div>
+              <div class="w-11 h-11 rounded-2xl grid place-items-center" style="background: rgba(6, 182, 212, 0.1); color: var(--cyan);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 12h7m-7 6h11M4 6h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </div>
+            </div>
+            <p class="mt-4 text-sm leading-relaxed" style="color: var(--muted);">
+              브랜드 포지셔닝부터 유입/전환까지, 지표 기반으로 운영을 설계합니다.
+            </p>
+            <div class="mt-6 grid sm:grid-cols-3 gap-3">
+              <div class="rounded-2xl border p-4" style="border-color: var(--line); background: rgba(255, 255, 255, 0.65);">
+                <div class="text-xs font-black" style="color: var(--ink);">Positioning</div>
+                <div class="mt-1 text-sm" style="color: var(--muted);">메시지 구조</div>
+              </div>
+              <div class="rounded-2xl border p-4" style="border-color: var(--line); background: rgba(255, 255, 255, 0.65);">
+                <div class="text-xs font-black" style="color: var(--ink);">Channel</div>
+                <div class="mt-1 text-sm" style="color: var(--muted);">채널 믹스</div>
+              </div>
+              <div class="rounded-2xl border p-4" style="border-color: var(--line); background: rgba(255, 255, 255, 0.65);">
+                <div class="text-xs font-black" style="color: var(--ink);">Measurement</div>
+                <div class="mt-1 text-sm" style="color: var(--muted);">성과 지표</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-6 card-soft card-border rounded-3xl p-7 lift">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <div class="text-xs font-black tracking-widest uppercase" style="color: var(--muted);">Media</div>
+                <div class="mt-2 text-xl font-black" style="color: var(--ink);">금융 미디어 IP</div>
+              </div>
+              <div class="w-11 h-11 rounded-2xl grid place-items-center" style="background: rgba(244, 114, 182, 0.1); color: var(--pink);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 7h16M4 12h10M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </div>
+            </div>
+            <p class="mt-4 text-sm leading-relaxed" style="color: var(--muted);">
+              출처/근거/정정 체계를 포함한 운영 규칙으로 신뢰를 유지합니다.
+            </p>
+          </div>
+
+          <div class="lg:col-span-6 card-soft card-border rounded-3xl p-7 lift">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <div class="text-xs font-black tracking-widest uppercase" style="color: var(--muted);">Venture</div>
+                <div class="mt-2 text-xl font-black" style="color: var(--ink);">전략적 벤처 투자</div>
+              </div>
+              <div class="w-11 h-11 rounded-2xl grid place-items-center" style="background: rgba(245, 158, 11, 0.12); color: var(--gold);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M12 2l3 7h7l-5.5 4 2 7-6.5-4.5L5.5 20l2-7L2 9h7l3-7z"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+            <p class="mt-4 text-sm leading-relaxed" style="color: var(--muted);">
+              검토(시장/제품/팀/리스크)와 지원(네트워크/운영)을 분리해 단계별 성장을 돕습니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sitemap -->
+    <section class="py-16 md:py-20">
+      <div class="max-w-6xl mx-auto px-5">
+        <div class="flex items-end justify-between gap-6 mb-8">
+          <div>
+            <div class="text-xs font-black tracking-widest uppercase" style="color: var(--muted);">Sitemap</div>
+            <div class="text-3xl font-black mt-2" style="color: var(--ink);">홈페이지 맵</div>
+            <div class="mt-2" style="color: var(--muted);">전체 구성을 한눈에 확인하세요.</div>
+          </div>
+          <a class="btn-secondary hidden sm:inline-flex" href="./pages/support-notice.html">공지사항 바로가기</a>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="card-soft rounded-3xl p-7 lift">
+            <div class="font-black" style="color: var(--ink);">회사소개</div>
+            <div class="mt-4 space-y-2" style="color: var(--muted);">
+              <a class="block hover:underline" href="./pages/company-greeting.html">대표인사말</a>
+              <a class="block hover:underline" href="./pages/company-overview.html">회사개요</a>
+              <a class="block hover:underline" href="./pages/company-vision.html">비전</a>
+              <a class="block hover:underline" href="./pages/company-location.html">오시는 길</a>
+            </div>
+          </div>
+          <div class="card-soft rounded-3xl p-7 lift">
+            <div class="font-black" style="color: var(--ink);">사업영역</div>
+            <div class="mt-4 space-y-2" style="color: var(--muted);">
+              <a class="block hover:underline" href="./pages/business-advisory.html">유사투자자문 서비스</a>
+              <a class="block hover:underline" href="./pages/business-marketing.html">글로벌 금융 마케팅</a>
+              <a class="block hover:underline" href="./pages/business-mcn.html">MCN 사업</a>
+              <a class="block hover:underline" href="./pages/business-vc.html">벤처캐피탈</a>
+            </div>
+          </div>
+          <div class="card-soft rounded-3xl p-7 lift">
+            <div class="font-black" style="color: var(--ink);">고객지원</div>
+            <div class="mt-4 space-y-2" style="color: var(--muted);">
+              <a class="block hover:underline" href="./pages/support-press.html">보도자료</a>
+              <a class="block hover:underline" href="./pages/support-consult.html">1:1 상담신청</a>
+              <a class="block hover:underline" href="./pages/support-notice.html">공지사항</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t" style="border-color: var(--line); background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px);">
+      <div class="max-w-6xl mx-auto px-5 py-12">
+        <div class="grid md:grid-cols-3 gap-8">
+          <div>
+            <div class="text-[11px] font-black uppercase tracking-widest" style="color: var(--muted);">Customer Center</div>
+            <div class="text-2xl font-black mt-2" style="color: var(--ink);">0000-0000-0000</div>
+            <div class="text-[12px] mt-1" style="color: var(--muted);">평일 09:00 - 18:00 (주말/공휴일 휴무)</div>
+            <a class="mt-5 btn-primary w-full" href="./pages/support-consult.html">상담신청 바로가기</a>
+          </div>
+          <div class="md:col-span-2">
+            <div class="text-[11px] font-black uppercase tracking-widest" style="color: var(--muted);">Company Information</div>
+            <div class="grid md:grid-cols-2 gap-4 text-sm mt-5" style="color: var(--muted);">
+              <div>상호명: 개미투자</div>
+              <div>대표자: 0000</div>
+              <div>사업자등록번호: 0000-0000-0000</div>
+              <div>본사주소: 0000</div>
+              <div>이메일: 0000@0000.co.kr</div>
+              <div>업무시간: 평일 09:00 - 18:00</div>
+            </div>
+            <div class="mt-10 text-xs" style="color: rgba(91, 107, 133, 0.85);">© <span id="year"></span> 개미투자. All Rights Reserved.</div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = String(new Date().getFullYear());
+    </script>
+  </body>
+</html>

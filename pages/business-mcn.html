@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MCN 사업 | 개미투자</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script>
+      tailwind.config = { theme: { extend: { fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui", "Noto Sans KR"] } } } };
+    </script>
+    <link rel="stylesheet" href="../assets/clone.css" />
+  </head>
+  <body class="font-sans bg-white text-slate-900">
+    <header class="fixed top-0 left-0 right-0 z-50">
+      <div class="glass-header">
+        <div class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
+          <a class="flex items-center gap-3" href="../index.html">
+            <div class="logo-badge">G</div>
+            <div class="font-black tracking-tight">개미투자</div>
+          </a>
+          <nav class="hidden md:flex items-center gap-6 text-sm font-bold">
+            <a class="hover:text-sky-600 transition-colors" href="../index.html">홈</a>
+            <a class="hover:text-sky-600 transition-colors" href="./company-overview.html">회사소개</a>
+            <a class="hover:text-sky-600 transition-colors" href="./business-advisory.html">사업영역</a>
+            <a class="hover:text-sky-600 transition-colors" href="./support-notice.html">고객지원</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-5 pt-28 pb-16">
+      <div class="mb-10">
+        <div class="text-sky-600 font-bold text-sm tracking-widest uppercase mb-2">Business</div>
+        <h1 class="text-3xl font-black">MCN 사업</h1>
+        <p class="text-slate-500 mt-2">금융 지식과 미디어 기술을 융합하여 신뢰 기반의 콘텐츠 생태계를 구축합니다.</p>
+      </div>
+
+      <div class="border border-slate-200 rounded-2xl p-6 bg-white">
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="border border-slate-200 rounded-2xl p-5">
+            <div class="text-slate-900 font-black mb-2">콘텐츠 포맷</div>
+            <div class="text-slate-500 text-sm leading-relaxed">칼럼/영상/요약 리포트 등 포맷을 정의합니다.</div>
+          </div>
+          <div class="border border-slate-200 rounded-2xl p-5">
+            <div class="text-slate-900 font-black mb-2">품질 기준</div>
+            <div class="text-slate-500 text-sm leading-relaxed">출처·근거·정정 체계를 통해 신뢰를 유지합니다.</div>
+          </div>
+          <div class="border border-slate-200 rounded-2xl p-5">
+            <div class="text-slate-900 font-black mb-2">운영 구조</div>
+            <div class="text-slate-500 text-sm leading-relaxed">업데이트/변경 사항을 공지로 안내합니다.</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="bg-slate-50 border-t border-slate-200">
+      <div class="max-w-6xl mx-auto px-5 py-10">
+        <div class="text-xs text-slate-400">© <span id="year"></span> 개미투자. All Rights Reserved.</div>
+      </div>
+    </footer>
+    <script>
+      document.getElementById("year").textContent = String(new Date().getFullYear());
+    </script>
+  </body>
+</html>
