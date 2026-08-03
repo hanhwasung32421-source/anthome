@@ -222,6 +222,42 @@
   text-align: center;
 }
 
+/* Hero notice (reference-like, dark glass bar) */
+.notice-hero{
+  background: rgba(7, 17, 37, .78);
+  border: 1px solid rgba(255,255,255,.14);
+  box-shadow: 0 26px 90px rgba(7, 17, 37, .45);
+  backdrop-filter: blur(14px);
+}
+.notice-hero__label{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#fff;
+  font-weight: 900;
+  letter-spacing:.18em;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+.notice-hero__icon{
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: rgba(200,30,30,.95);
+  display:grid;
+  place-items:center;
+  box-shadow: 0 12px 26px rgba(200,30,30,.22);
+}
+.notice-hero__text{
+  color: rgba(255,255,255,.82);
+  font-size: 13.5px;
+  line-height: 1.65;
+}
+.notice-hero__highlight{
+  color: var(--gold);
+  font-weight: 900;
+}
+
 /* Small badge (pinned) */
 .badge-pin {
   display: inline-flex;
